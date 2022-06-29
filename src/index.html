@@ -1,23 +1,31 @@
 <html>
 
-<head></head>
+<head>
+    <style>
+        .border {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
 
 <body>
     <div id="bind-attribute">
-        <span v-bind:title="message">
-            鼠标悬停几秒钟查看此处动态绑定的提示信息！
-        </span>
+        <div v-bind:title="message" v-bind:class="className">
+            鼠标hover查看信息
+        </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const AttributeBinding = {
             data() {
                 return {
-                    message: 'You loaded this page on ' + new Date().toLocaleString()
+                    className: 'border',
+                    message: '页面加载时间是： ' + new Date().toLocaleString()
                 }
             }
         }
-
         Vue.createApp(AttributeBinding).mount('#bind-attribute')
     </script>
 </body>
