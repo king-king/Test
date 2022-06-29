@@ -7,22 +7,29 @@
             height: 100px;
             background-color: red;
         }
+
+        .border.hide {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
     <div id="bind-attribute">
-        <div v-bind:title="message" v-bind:class="className">
-            鼠标hover查看信息
-        </div>
+        <div v-if="show" class="border">假设这是一个弹框</div>
+        <button v-on:click="toggle">展示/隐藏</button>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const AttributeBinding = {
             data() {
                 return {
-                    className: 'border',
-                    message: '页面加载时间是： ' + new Date().toLocaleString()
+                    show: true
+                }
+            },
+            methods: {
+                toggle() {
+                    this.show = !this.show;
                 }
             }
         }
