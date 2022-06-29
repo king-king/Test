@@ -16,15 +16,23 @@
 
 <body>
     <div id="main">
-        <my-component v-bind:name="name" v-bind:year="year"></my-component>
+        <my-component v-for="item in people" v-bind:name="item.name" v-bind:year="item.year"></my-component>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         const app = {
             data() {
                 return {
-                    name: 'jack',
-                    year: 12
+                    people: [{
+                        name: 'jack',
+                        year: 12
+                    }, {
+                        name: 'tom',
+                        year: 10
+                    }, {
+                        name: 'mack',
+                        year: 11
+                    }]
                 }
             },
             components: {
