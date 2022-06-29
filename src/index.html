@@ -15,25 +15,27 @@
 </head>
 
 <body>
-    <div id="bind-attribute">
-        <div v-if="show" class="border">假设这是一个弹框</div>
-        <button v-on:click="toggle">展示/隐藏</button>
+    <div id="main">
+        <my-component v-bind:name="name" v-bind:year="year"></my-component>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        const AttributeBinding = {
+        const app = {
             data() {
                 return {
-                    show: true
+                    name: 'jack',
+                    year: 12
                 }
             },
-            methods: {
-                toggle() {
-                    this.show = !this.show;
+            components: {
+                // 注册一个新组件
+                MyComponent: {
+                    props: ['name', 'year'],
+                    template: `<li>hello , my name is {{name}} , i am {{year}} years old</li>`
                 }
             }
         }
-        Vue.createApp(AttributeBinding).mount('#bind-attribute')
+        Vue.createApp(app).mount('#main')
     </script>
 </body>
 
