@@ -1,17 +1,6 @@
 <html>
 
 <head>
-    <style>
-        .border {
-            width: 100px;
-            height: 100px;
-            background-color: red;
-        }
-
-        .border.hide {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -20,7 +9,7 @@
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
-        const app = {
+        const appConfig = {
             data() {
                 return {
                     people: [{
@@ -43,7 +32,9 @@
                 }
             }
         }
-        Vue.createApp(app).mount('#main')
+        const app = Vue.createApp(appConfig);
+        const vm = app.mount('#main')
+        console.log(app,vm)
     </script>
 </body>
 
