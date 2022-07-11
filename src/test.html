@@ -3,37 +3,7 @@
 <head></head>
 
 <body>
-    <script>
-        /**
-         * @param {number} n
-         * @return {string[]}
-         * @param l 左括号已经用了几个
-         * @param r 右括号已经用了几个
-         * @param str 当前递归得到的拼接字符串结果
-         * @param res 结果集
-         */
-        const generateParenthesis = function (n) {
-            const res = [];
-
-            function dfs(left, right, str) {
-                if (left == n && right == n) {
-                    return res.push(str);
-                }
-                // l 小于 n 时可以插入左括号，最多可以插入 n 个
-                if (left < n) {
-                    dfs(left + 1, right, str + "(");
-                }
-                // r < l 时 可以插入右括号
-                if (right < left) {
-                    dfs(left, right + 1, str + ")");
-                }
-            }
-            dfs(0, 0, "");
-            return res;
-        };
-
-        console.log(generateParenthesis(3))
-    </script>
+   <script src="./test.js"></script>
 </body>
 
 </html>
