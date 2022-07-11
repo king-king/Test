@@ -4,46 +4,35 @@
 
 <body>
     <script>
-        var longestPalindrome = function (s) {
-            if (s.length === 0) {
-                return '';
-            } else if (s.length === 1) {
-                return s;
-            } else if (s.length === 2) {
-                if (s[0] === s[1]) {
-                    return s;
+        /**
+         * @param {number} n
+         * @return {string[]}
+         * @param l 左括号已经用了几个
+         * @param r 右括号已经用了几个
+         * @param str 当前递归得到的拼接字符串结果
+         * @param res 结果集
+         */
+        const generateParenthesis = function (n) {
+            const res = [];
+
+            function dfs(left, right, str) {
+                if (left == n && right == n) {
+                    return res.push(str);
                 }
-                return s[0];
-            }
-            let result = '';
-            for (let cur = 1; cur < s.length; cur++) {
-                let curResult = s[cur];
-                if (s[cur + 1] !== s[cur - 1]) {
-                    if (s[cur + 1] === s[cur]) {
-                        curResult = s[cur] + s[cur + 1]
-                    } else if (s[cur - 1] === s[cur]) {
-                        curResult = s[cur - 1] + s[cur]
-                    }
-                    if (curResult.length > result.length) {
-                        result = curResult;
-                    }
-                    break;
+                // l 小于 n 时可以插入左括号，最多可以插入 n 个
+                if (left < n) {
+                    dfs(left + 1, right, str + "(");
                 }
-                for (let step = 1; step <= cur; step++) {
-                    if (s[cur - step] !== s[cur + step]) {
-                        break;
-                    } else {
-                        curResult = `${s[cur - step]}${curResult}${s[cur + step]}`
-                    }
-                }
-                if (curResult.length > result.length) {
-                    result = curResult;
+                // r < l 时 可以插入右括号
+                if (right < left) {
+                    dfs(left, right + 1, str + ")");
                 }
             }
-            return result;
+            dfs(0, 0, "");
+            return res;
         };
 
-        console.log(longestPalindrome('aaaa'))
+        console.log(generateParenthesis(3))
     </script>
 </body>
 
