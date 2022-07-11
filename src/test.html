@@ -1,0 +1,50 @@
+<html>
+
+<head></head>
+
+<body>
+    <script>
+        var longestPalindrome = function (s) {
+            if (s.length === 0) {
+                return '';
+            } else if (s.length === 1) {
+                return s;
+            } else if (s.length === 2) {
+                if (s[0] === s[1]) {
+                    return s;
+                }
+                return s[0];
+            }
+            let result = '';
+            for (let cur = 1; cur < s.length; cur++) {
+                let curResult = s[cur];
+                if (s[cur + 1] !== s[cur - 1]) {
+                    if (s[cur + 1] === s[cur]) {
+                        curResult = s[cur] + s[cur + 1]
+                    } else if (s[cur - 1] === s[cur]) {
+                        curResult = s[cur - 1] + s[cur]
+                    }
+                    if (curResult.length > result.length) {
+                        result = curResult;
+                    }
+                    break;
+                }
+                for (let step = 1; step <= cur; step++) {
+                    if (s[cur - step] !== s[cur + step]) {
+                        break;
+                    } else {
+                        curResult = `${s[cur - step]}${curResult}${s[cur + step]}`
+                    }
+                }
+                if (curResult.length > result.length) {
+                    result = curResult;
+                }
+            }
+            return result;
+        };
+
+        console.log(longestPalindrome('aaaa'))
+    </script>
+</body>
+
+</html>
