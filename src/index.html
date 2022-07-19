@@ -5,7 +5,7 @@
 
 <body>
     <div id="main">
-        <my-component v-for="item in people" v-bind:name="item.name" v-bind:year="item.year"></my-component>
+        <my-component v-for="item in people" v-bind:name="item.name" v-bind:year="item.year" sex="boy"></my-component>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -24,17 +24,19 @@
                     }]
                 }
             },
+            mounted(){
+                console.log('mounted')
+            },
             components: {
                 // 注册一个新组件
                 MyComponent: {
-                    props: ['name', 'year'],
-                    template: `<li>hello , my name is {{name}} , i am {{year}} years old</li>`
+                    props: ['name', 'year', 'sex'],
+                    template: `<li>hello , my name is {{name}} , i am {{year}} years old , sex is {{sex}}</li>`
                 }
             }
         }
         const app = Vue.createApp(appConfig);
         const vm = app.mount('#main')
-        console.log(app,vm)
     </script>
 </body>
 
