@@ -5,7 +5,6 @@
 
 <body>
     <div id="main">
-        <my-component v-for="item in people" v-bind:name="item.name" v-bind:year="item.year" sex="boy"></my-component>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -14,6 +13,7 @@
             template: `<li>hello , my name is {{name}} , i am {{year}} years old , sex is {{sex}}</li>`
         };
         const appConfig = {
+            template: '<my-component v-for="item in people" v-bind:name="item.name" v-bind:year="item.year" sex="boy"></my-component>',
             data() {
                 return {
                     people: [{
