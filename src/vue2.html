@@ -1,0 +1,44 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <div id="main">
+        <my-component v-for="item in people" v-bind:name="item.name" v-bind:year="item.year" sex="boy"></my-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8"></script>
+    <script>
+        const MyComponent = {
+            props: ['name', 'year', 'sex'],
+            template: `<li>hello , my name is {{name}} , i am {{year}} years old , sex is {{sex}}</li>`
+        };
+        const appConfig = {
+            data: {
+                people: [{
+                    name: 'jack',
+                    year: 12
+                }, {
+                    name: 'tom',
+                    year: 10
+                }, {
+                    name: 'mack',
+                    year: 11
+                }]
+            },
+            mounted() {
+                console.log('mounted')
+            },
+            components: {
+                // 注册一个新组件
+                MyComponent
+            }
+        }
+        new Vue({
+            el: '#main',
+            ...appConfig
+        })
+    </script>
+</body>
+
+</html>
