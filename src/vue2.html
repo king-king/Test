@@ -27,11 +27,20 @@
                 }]
             },
             mounted() {
-                console.log('mounted')
+                // console.log('mounted')
             },
             components: {
                 // 注册一个新组件
-                MyComponent
+                // MyComponent
+            },
+            render(h) {
+                return h(MyComponent, {
+                    props: {
+                        name: 'wq',
+                        year: 1200,
+                        sex: 'boy'
+                    }
+                });
             }
         }
         new Vue({
