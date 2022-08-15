@@ -9,6 +9,10 @@
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
+        const MyComponent = {
+            props: ['name', 'year', 'sex'],
+            template: `<li>hello , my name is {{name}} , i am {{year}} years old , sex is {{sex}}</li>`
+        };
         const appConfig = {
             data() {
                 return {
@@ -24,15 +28,12 @@
                     }]
                 }
             },
-            mounted(){
+            mounted() {
                 console.log('mounted')
             },
             components: {
                 // 注册一个新组件
-                MyComponent: {
-                    props: ['name', 'year', 'sex'],
-                    template: `<li>hello , my name is {{name}} , i am {{year}} years old , sex is {{sex}}</li>`
-                }
+                MyComponent
             }
         }
         const app = Vue.createApp(appConfig);
