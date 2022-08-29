@@ -92,7 +92,16 @@
             day.innerHTML = date.day;
             desc.innerHTML = date.desc;
             if (i === 5 || i === 6) {
-               td.classList.add('holiday')
+               if (work[date.day]) {
+                  desc.innerHTML = '班'
+                  td.classList.add('work')
+               } else {
+                  td.classList.add('holiday')
+               }
+            } else {
+               if (holiday[date.day]) {
+                  td.classList.add('holiday')
+               }
             }
             td.appendChild(day)
             td.appendChild(desc)
