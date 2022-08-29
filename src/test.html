@@ -1,6 +1,33 @@
 <html>
 
-<head></head>
+<head>
+   <style>
+      table thead tr {
+         padding: 0;
+         background: #f5f5f5;
+         border-collapse: separate;
+         border-spacing: 0;
+      }
+
+      table thead th {
+         width: 45px;
+         height: 45px;
+      }
+
+      table tbody td {
+         border-radius: 5px;
+         width: 45px;
+         height: 45px;
+         text-align: center;
+         font-size: 12px;
+      }
+
+      table tbody td.holiday {
+         background: #FDE3E4;
+         color: #F73131;
+      }
+   </style>
+</head>
 
 <body>
    <table>
@@ -19,6 +46,20 @@
       </tbody>
    </table>
    <script>
+      const holiday = {
+         '9.10': '中秋节',
+         '10.1': '国庆节',
+         '10.2': true,
+         '10.3': true,
+         '10.4': true,
+         '10.5': true,
+         '10.6': true,
+         '10.7': true
+      };
+      const work = {
+         '10.6': true,
+         '10.7': true
+      };
       let oneDayM = 24 * 60 * 60 * 1000;
       let start = new Date('2022-08-29');
       const data = [];
@@ -42,7 +83,7 @@
       data.forEach(week => {
          const tr = document.createElement('tr');
          tbody.appendChild(tr)
-         week.forEach(date => {
+         week.forEach((date, i) => {
             const td = document.createElement('td');
             const day = document.createElement('div');
             day.className = 'day'
@@ -50,6 +91,9 @@
             desc.className = 'desc'
             day.innerHTML = date.day;
             desc.innerHTML = date.desc;
+            if (i === 5 || i === 6) {
+               td.classList.add('holiday')
+            }
             td.appendChild(day)
             td.appendChild(desc)
             tr.appendChild(td)
