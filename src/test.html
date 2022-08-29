@@ -3,7 +3,59 @@
 <head></head>
 
 <body>
-   <script src="./test.js"></script>
+   <table>
+      <thead>
+         <tr>
+            <th>一</th>
+            <th>二</th>
+            <th>三</th>
+            <th>四</th>
+            <th>五</th>
+            <th>六</th>
+            <th>日</th>
+         </tr>
+      </thead>
+      <tbody>
+      </tbody>
+   </table>
+   <script>
+      let oneDayM = 24 * 60 * 60 * 1000;
+      let start = new Date('2022-08-29');
+      const data = [];
+      for (let w = 0; w < 17; w++) {
+         const week = [];
+         data.push(week)
+         for (let d = 0; d < 7; d++) {
+            const curyear = start.getFullYear();
+            const curmonth = start.getMonth() + 1;
+            const curdate = start.getDate();
+            week.push({
+               day: `${curmonth}.${curdate}`,
+               desc: ''
+            })
+            start = new Date(start.getTime() + oneDayM)
+         }
+      }
+   </script>
+   <script>
+      const tbody = document.querySelector('tbody')
+      data.forEach(week => {
+         const tr = document.createElement('tr');
+         tbody.appendChild(tr)
+         week.forEach(date => {
+            const td = document.createElement('td');
+            const day = document.createElement('div');
+            day.className = 'day'
+            const desc = document.createElement('div');
+            desc.className = 'desc'
+            day.innerHTML = date.day;
+            desc.innerHTML = date.desc;
+            td.appendChild(day)
+            td.appendChild(desc)
+            tr.appendChild(td)
+         })
+      })
+   </script>
 </body>
 
 </html>
