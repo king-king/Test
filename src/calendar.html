@@ -1,114 +1,127 @@
 <html>
 
 <head>
-   <style>
-      table thead tr {
-         padding: 0;
-         background: #f5f5f5;
-         border-collapse: separate;
-         border-spacing: 0;
-      }
+    <style>
+        table {
+            margin: auto;
+        }
 
-      table thead th {
-         width: 45px;
-         height: 45px;
-      }
+        table thead tr {
+            padding: 0;
+            background: #f5f5f5;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
 
-      table tbody td {
-         border-radius: 5px;
-         width: 45px;
-         height: 45px;
-         text-align: center;
-         font-size: 12px;
-      }
+        table thead th {
+            width: 65px;
+            height: 65px;
+        }
 
-      table tbody td.holiday {
-         background: #FDE3E4;
-         color: #F73131;
-      }
-   </style>
+        table tbody td {
+            border-radius: 5px;
+            width: 65px;
+            height: 65px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        table tbody td.holiday {
+            background: #FDE3E4;
+            color: #F73131;
+        }
+
+        table tbody td.work {
+            background: #f5f5f6;
+            color: #626675;
+        }
+    </style>
 </head>
 
 <body>
-   <table>
-      <thead>
-         <tr>
-            <th>一</th>
-            <th>二</th>
-            <th>三</th>
-            <th>四</th>
-            <th>五</th>
-            <th>六</th>
-            <th>日</th>
-         </tr>
-      </thead>
-      <tbody>
-      </tbody>
-   </table>
-   <script>
-      const holiday = {
-         '9.10': '中秋节',
-         '10.1': '国庆节',
-         '10.2': true,
-         '10.3': true,
-         '10.4': true,
-         '10.5': true,
-         '10.6': true,
-         '10.7': true
-      };
-      const work = {
-         '10.6': true,
-         '10.7': true
-      };
-      let oneDayM = 24 * 60 * 60 * 1000;
-      let start = new Date('2022-08-29');
-      const data = [];
-      for (let w = 0; w < 17; w++) {
-         const week = [];
-         data.push(week)
-         for (let d = 0; d < 7; d++) {
-            const curyear = start.getFullYear();
-            const curmonth = start.getMonth() + 1;
-            const curdate = start.getDate();
-            week.push({
-               day: `${curmonth}.${curdate}`,
-               desc: ''
-            })
-            start = new Date(start.getTime() + oneDayM)
-         }
-      }
-   </script>
-   <script>
-      const tbody = document.querySelector('tbody')
-      data.forEach(week => {
-         const tr = document.createElement('tr');
-         tbody.appendChild(tr)
-         week.forEach((date, i) => {
-            const td = document.createElement('td');
-            const day = document.createElement('div');
-            day.className = 'day'
-            const desc = document.createElement('div');
-            desc.className = 'desc'
-            day.innerHTML = date.day;
-            desc.innerHTML = date.desc;
-            if (i === 5 || i === 6) {
-               if (work[date.day]) {
-                  desc.innerHTML = '班'
-                  td.classList.add('work')
-               } else {
-                  td.classList.add('holiday')
-               }
-            } else {
-               if (holiday[date.day]) {
-                  td.classList.add('holiday')
-               }
+    <table>
+        <thead>
+            <tr>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th>六</th>
+                <th>日</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        const holiday = {
+            '9.10': '中秋节',
+            '9.12': true,
+            '10.1': '国庆节',
+            '10.2': true,
+            '10.3': true,
+            '10.4': true,
+            '10.5': true,
+            '10.6': true,
+            '10.7': true
+        };
+        const work = {
+            '10.8': true,
+            '10.9': true
+        };
+        let oneDayM = 24 * 60 * 60 * 1000;
+        let start = new Date('2022-08-29');
+        const data = [];
+        for (let w = 0; w < 17; w++) {
+            const week = [];
+            data.push(week)
+            for (let d = 0; d < 7; d++) {
+                const curmonth = start.getMonth() + 1;
+                const curdate = start.getDate();
+                week.push({
+                    day: `${curmonth}.${curdate}`,
+                    desc: ''
+                })
+                start = new Date(start.getTime() + oneDayM)
             }
-            td.appendChild(day)
-            td.appendChild(desc)
-            tr.appendChild(td)
-         })
-      })
-   </script>
+        }
+    </script>
+    <script>
+        const tbody = document.querySelector('tbody')
+        data.forEach(week => {
+            const tr = document.createElement('tr');
+            tbody.appendChild(tr)
+            week.forEach((date, i) => {
+                const td = document.createElement('td');
+                const day = document.createElement('div');
+                day.className = 'day'
+                const desc = document.createElement('div');
+                desc.className = 'desc'
+                day.innerHTML = date.day;
+                desc.innerHTML = date.desc;
+                if (holiday[date.day]) {
+                    td.classList.add('holiday');
+                    if (holiday[date.day].length) {
+                        desc.innerHTML = holiday[date.day]
+                    }else{
+                        desc.innerHTML ='休'
+                    }
+                } else if (i === 5 || i === 6) {
+                    if (work[date.day]) {
+                        desc.innerHTML = '班'
+                        td.classList.add('work')
+                    } else {
+                        td.classList.add('holiday')
+                        desc.innerHTML ='休'
+                    }
+                }
+                td.appendChild(day)
+                td.appendChild(desc)
+                tr.appendChild(td)
+            })
+        })
+    </script>
 </body>
 
 </html>
