@@ -19,32 +19,32 @@
         } = G2Plot;
         const data = [{
                 year: '1991',
-                value: 3,
-                category:'男'
+                value: 3576423,
+                category: '男'
             },
             {
                 year: '1992',
-                value: 4,
-                category:'男'
+                value: 4432421,
+                category: '男'
             },
             {
                 year: '1993',
-                value: 3.5,
-                category:'男'
-            },{
+                value: 3425632.5,
+                category: '男'
+            }, {
                 year: '1991',
-                value: 1,
-                category:'女'
+                value: 165347687,
+                category: '女'
             },
             {
                 year: '1992',
-                value: 2,
-                category:'女'
+                value: 2423432,
+                category: '女'
             },
             {
                 year: '1993',
-                value: 2.5,
-                category:'女'
+                value: 2656422.5,
+                category: '女'
             }
         ];
 
@@ -52,7 +52,27 @@
             data,
             xField: 'year',
             yField: 'value',
-            seriesField: 'category'
+            seriesField: 'category',
+            yAxis: {
+                label: {
+                    formatter(text, item, index) {
+                        const value = Number(text);
+                        if (isNaN(value)) {
+                            return value;
+                        }
+                        if (value > 999999999 || value < -999999999) {
+                            return `${(value / 1000000000).toFixed(1)}B`;
+                        }
+                        if (value > 999999 || value < -999999) {
+                            return `${(value / 1000000).toFixed(1)}M`;
+                        }
+                        if (value > 999 || value < -999) {
+                            return `${(value / 1000).toFixed(1)}K`;
+                        }
+                        return value;
+                    }
+                }
+            }
         });
 
         line.render();
