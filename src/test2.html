@@ -1,0 +1,42 @@
+<html>
+
+<head>
+   <style>
+   </style>
+</head>
+
+<body>
+   <input type="text" />
+   <script>
+      function getLen(str) {
+         var len = 0;
+         for (var i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 127 || str.charCodeAt(i) == 94) {
+               len += 2;
+            } else {
+               len++;
+            }
+         }
+         return len;
+      }
+
+      // console.log('getLen', getLen('👱‍'))
+      // console.log('getLen', getLen('😊'))
+
+      // console.log('length', '👱'.length)
+      // console.log('length', '😊'.length)
+
+      // console.log('...length', [...'👱'].length)
+      // console.log('...length', [...'😊'].length)
+
+      document.querySelector('input').oninput = function (e) {
+         const value = e.target.value;
+         console.log(e.target.value)
+         console.log('getLen', getLen(value))
+         console.log('length', value.length)
+         console.log('...length', [...value].length)
+      }
+   </script>
+</body>
+
+</html>
